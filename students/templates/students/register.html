@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+    <div class="login-container form-container">
+        <p>{% if form.errors %}Passwords are not the same, try again{%endif%}</p>
+        <form action="" method="post" class="login-form">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username" class="form-control"><br>
+            <input type="email" name="email" placeholder="E-Mail" class="form-control"><br>
+            <input type="password" name="password1" placeholder="Passoword" class="form-control"><br>
+            <input type="password" name="password2" placeholder="Repeat password" class="form-control"><br>
+            <input type="submit" class="btn btn-success login-button" value="Create my account">
+            
+        </form>
+        
+        <a href="{% url 'login' %}" class="login-link-password login-links">Alredy have an account?</a>
+    </div>
+{% endblock %}

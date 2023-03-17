@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if object %}Edit {{object.title}}{%else%}Create a new course{%endif%}{% endblock %}
+
+{% block content %}
+    <div class="form-container couse-form">
+        <h3 class="form-title">{% if object %}Edit course "{{object.title}}"{%else%}Create a new course{%endif%}</h3>
+        <form action="."  method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.as_p}}
+
+            <input type="submit" class="creation-form-input-submit btn btn-success" value="Submit">
+        </form>
+        
+    </div>
+{% endblock %}

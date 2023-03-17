@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Vcourse{% endblock %}
+
+{% block content %}
+    <div class="default-container">
+        <div class="module-detail__items">
+            <h3 class="module-detail__items-h3">Title: {{ object.title }}</h3>
+            <p class="module-detail__items-description">Description: {{ object.description }}</p>
+            <div class="module-detail__links">
+                <a href="{% url 'course_content_create' object.course.id object.id %}" class="btn btn-success">Add new content</a>
+                <a class="btn btn-danger" href="{% url 'course_module_delete' object.id object.course.id %}">Delete module</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Modules of "{{ course.title }}"{% endblock %}
+
+{% block content %}
+    <div class="default-container">
+        <h1>{{ course.title }}</h1>
+        <nav class="modules-menu">
+            <ul class="modules-list">
+                {% for module in modules %}
+                    <li class="modules-list__item-title" onclick="get_list(event)"><div class="top-module-info"><span class="modules-list__item-title-main"><a href="{% url 'course_module_detail' module.id %}">{{ module.title }}</a>  <a href="{% url 'course_module_update' module.id module.course.id %}">Edit</a></span>
+                        <div><img class="arrow" src="{% static 'courses/img/down-arrow.png' %}" height="30px" width="30px"></div></div>
+                        <ul class="modules-list__item-contents-list" style="display: none;">
+                            {% for content in module.contents.all %}
+                                <li class="modules-list__item-content">
+                                    <a href="{% url 'owner_content_detail' content.id %}">{{content.title}}</a>  <a href="{% url 'course_content_update' module.course.id content.id %}">Edit</a>
+                                </li>
+                            {% empty %}
+                                <li>No contents yet.</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% empty %}
+                    <li>No modules yet.</li>
+                {% endfor %}
+            </ul>
+        </nav>
+        <p>{{course.description}}</p>
+        <a href="{% url 'course_module_create' course.id %}" class="new-moduleadd__button btn btn-success">Add a new module</a>
+    </div>
+    <script>
+        function get_list(event) {
+            var item = event.currentTarget;
+            var sublist = item.querySelector('.modules-list__item-contents-list');
+            if (sublist.style.display === 'none'){
+                sublist.style.display = 'block'
+                item.querySelector('.arrow').src = "{% static 'courses/img/top-arrow.png' %}"
+                item.querySelector('.arrow').height = '20'
+            } else{
+                sublist.style.display = 'none'
+                item.querySelector('.arrow').src = "{% static 'courses/img/down-arrow.png' %}"
+                item.querySelector('.arrow').height = '30'
+            }
+        }
+
+    </script>
+{% endblock %}

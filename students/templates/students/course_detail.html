@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Modules of "{{ course.title }}"{% endblock %}
+
+{% block content %}
+    <div class="default-container">
+        <h1 class="course-title">{{ course.title }}</h1>
+        <nav class="modules-menu">
+            <ul class="modules-list">
+                {% for module in modules %}
+                    <li class="modules-list__item-title" onclick="get_list(event)"><div class="top-module-info"><a href="{% url 'module_detail' module.id %}">{{ module.title }}</a>
+                        <div><img class="arrow" src="{% static 'courses/img/down-arrow.png' %}" height="30px" width="30px"></div></div>
+                        <ul class="modules-list__item-contents-list" style="display: none;">
+                            {% for content in module.contents.all %}
+                                <li class="modules-list__item-content">
+                                    {% if request.user in module.course.students.all %}
+                                        <a href="{% url 'content_detail' content.id %}">{{content.title}}</a>
+                                    {% else %}
+                                        <span>{{content.title}}</span>
+                                    {% endif %}
+                                </li>
+                            {% empty %}
+                                <li>It isn't any modules yet</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% empty %}
+                    <li>No modules yet.</li>
+                {% endfor %}
+            </ul>
+        </nav>
+        <div class="down-info">
+            <p class="course-description">{{course.description}}</p>
+            {% if request.user.is_authenticated %}
+                {% if request.user in course.students.all %}
+                    
+                    <form action="{% url 'student_unenroll_course' %}" method="post">
+                        {{enroll_form}}
+                        {% csrf_token %}
+                        <input type="submit" value="Unenroll" class="btn btn-success">
+                    </form>
+                {% else %}
+                    <form action="{% url 'student_enroll_course' %}" method="post">
+                        {{enroll_form}}
+                        {% csrf_token %}
+                        <input type="submit" value="Enroll now" class="btn btn-success">
+                {% endif %}
+            {% endif %}
+        </div>
+       
+    </div>
+    <script>
+        function get_list(event) {
+            var item = event.currentTarget;
+            var sublist = item.querySelector('.modules-list__item-contents-list');
+            if (sublist.style.display === 'none'){
+                sublist.style.display = 'block'
+                item.querySelector('.arrow').src = "{% static 'courses/img/top-arrow.png' %}"
+                item.querySelector('.arrow').height = '20'
+            } else{
+                sublist.style.display = 'none'
+                item.querySelector('.arrow').src = "{% static 'courses/img/down-arrow.png' %}"
+                item.querySelector('.arrow').height = '30'
+            }
+        }
+
+    </script>
+{% endblock %}

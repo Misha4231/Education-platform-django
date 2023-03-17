@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Course List{% endblock %}
+
+{% block content %}
+    <div class="default-container">
+        <div class="top-info">
+        <h1 class="course-list-h1">Video courses</h1>
+        <div class="course-search">
+            <form action="." method="get">
+                <input type="text" name="query" placeholder="Query"><br>
+                <input type="submit" value="Search" class="btn btn-success submit-query">
+            </form>
+        </div>
+            
+    </div>
+        <ul class="top-subjects-list">
+            <li class="top-subjects-list__item"><a href="{% url 'catalog' %}">All subjects</a></li>
+            {% for subject in subjects_list %}
+                <li class="top-subjects-list__item"><a href="{% url 'catalog_filter' subject.slug %}">{{subject.title}}</a></li>
+            {% endfor %}
+        </ul>
+        
+        <ul class="courselist">
+            {% for course in courses %}
+                <li class="course-list__item">
+                    <a class="course-list__item-fulllink" href="{% url 'course_detail' course.id %}">
+                        <div class="title-image-cont">
+                            <h3 class="course-list__item-title">{{ course.title }}</h3>
+                            <img src="{{course.photo.url}}" class="course-list__item-photo">
+                        </div>
+                        <span class="course-list__item-owner">{{course.owner.get_full_name}}</span><br>
+                        <span class="course-list__item-price">{{course.price}}</span><br>
+                    </a>
+                </li>
+            {% empty %}
+                <li>It isn't any courses yet</li>
+            {% endfor %}
+        </ul>   
+        
+        
+    </div>
+{% endblock %}

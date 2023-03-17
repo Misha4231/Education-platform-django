@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Vcourse{% endblock %}
+
+{% block content %}
+    <div class="default-container">
+        <div class="module-detail__items">
+            <h3 class="module-detail__items-h3">Title: {{ object.title }}</h3>
+            <p class="module-detail__items-description">Description: {{ object.description }}</p>
+            
+        </div>
+    </div>
+{% endblock %}

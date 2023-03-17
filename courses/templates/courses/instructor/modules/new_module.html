@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if object %}Edit moudle "{{object.title}}"{% else %}Create a new module{% endif %}{% endblock %}
+
+{% block content %}
+    <div class="form-container newmodel-form-cont">
+        <div class="items">
+            <h2 class="newmodel-form-h1">{% if object %}Edit moudle "{{object.title}}"{% else %}Create a new module{% endif %}</h2>
+        <form action="." method="post" class="newmodel-form">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Submit" class="btn btn-success">
+        </form>
+        </div>
+    </div>
+{% endblock %}

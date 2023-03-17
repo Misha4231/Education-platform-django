@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load embed_video_tags %}
+
+
+{% block title %}Vcourse{% endblock %}
+
+{% block content %}
+    <div class="default-container">
+        <h3>{{ object.title }}</h3>
+        <p>{{ object.description }}</p>
+        <div>
+            {% video object.video_url "small" %}
+        </div>
+        <a href="{% url 'owner_content_delete' object.id object.module.course.id %}" class="btn btn-danger">Detele content</a>
+    </div>
+{% endblock %}

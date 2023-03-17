@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <div class="login-container form-container">
+        <p>{% if form.errors %}Login not successfull, try again{%endif%}</p>
+        <form action="" method="post" class="login-form">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username" class="form-control"><br>
+            <input type="password" name="password" placeholder="Password" class="form-control"><br>
+            <input type="hidden" name="next" value="{{next}}">
+            <input type="submit" class="btn btn-success login-button" value="Log in">
+            
+        </form>
+        
+        <a href="{% url 'password_reset' %}" class="login-link-password login-links">Forgotten password?</a>
+    </div>
+{% endblock %}

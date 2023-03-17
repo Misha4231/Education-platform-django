@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load embed_video_tags %}
+
+
+{% block title %}Vcourse{% endblock %}
+
+{% block content %}
+    <div class="default-container">
+        <h3 class="course-title">{{ object.title }}</h3>
+        <p>{{ object.description }}</p>
+        <div>
+            {% video object.video_url "large" %}
+        </div>
+        
+    </div>
+{% endblock %}
