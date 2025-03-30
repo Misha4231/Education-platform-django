@@ -4,7 +4,7 @@ from .views import *
 urlpatterns = [
     path('owner_courses/', OwnerCourseList.as_view(), name='owner_courses'),
     path('owner_courses/<slug>/', OwnerCourseList.as_view(), name='owner_courses_sorted'),
-    path('owner_course_create/', OwnerCourseCreate.as_view(), name='course_craete'),
+    path('owner_course_create/', OwnerCourseCreate.as_view(), name='course_create'),
     path('owner_course_edit/<pk>/', OwnerCourseUpdate.as_view(), name='course_edit'),
     path('<pk>/owner_course_delete/', OwnerCourseDetele.as_view(), name='course_delete'),
     path('owner_course_module_list/<pk>/', OwnerCourseModulesList.as_view(), name='course_module_list'),

@@ -59,12 +59,12 @@ class CourseOwnerEditMixin(OwnerMixin,PermisionCheckMixin):
         
         return super().form_valid(form)
     
-
-class OwnerCourseCreate(CourseOwnerEditMixin,CreateView):
+class OwnerCourseCreate(CourseOwnerEditMixin, CreateView):
     pass
 
-class OwnerCourseUpdate(CourseOwnerEditMixin,UpdateView):
+class OwnerCourseUpdate(CourseOwnerEditMixin, UpdateView):
     pass
+
 
 class OwnerCourseDetele(PermisionCheckMixin,DeleteView):
     template_name = 'courses/instructor/course_delete.html'

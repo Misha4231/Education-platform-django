@@ -84,8 +84,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'eduplatform',
-        'USER': 'eduplatform',
-        'PASSWORD': '12345',
+        'USER': 'user1',
+        'PASSWORD': '123456',
         'HOST': 'localhost',
         'PORT': '5432'
     }
